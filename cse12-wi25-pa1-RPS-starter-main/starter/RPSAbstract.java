@@ -59,6 +59,13 @@ public abstract class RPSAbstract implements RPSInterface {
     public boolean isValidMove(String move) {
         // TODO
         // Use a loop here
+        for(String moves : possibleMoves)
+        {
+                if(moves.equals(move))
+                {
+                        return true;
+                }
+        }        
 
         return false;  // dummy return value so code compiles.
     }
@@ -66,9 +73,30 @@ public abstract class RPSAbstract implements RPSInterface {
     @Override
     public void playRPS(String playerMove, String cpuMove) {
         // TODO
-
+        System.out.print("I choose " + cpuMove + ".");
+        playerMoves[numGames] = playerMove;
+        cpuMoves[numGames] = cpuMove;
         // Use determineWinner to determine who won
-
+        if(determineWinner(playerMove, cpuMove) == PLAYER_WIN_OUTCOME)
+        {
+                numPlayerWins++;
+                System.out.println(" You win.");
+        }
+        else if(determineWinner(playerMove, cpuMove) == CPU_WIN_OUTCOME)
+        {
+                numCPUWins++;
+                System.out.println(" I win.");
+        }
+        else if(determineWinner(playerMove, cpuMove) == TIE_OUTCOME)
+        {
+                numTies++;
+                System.out.println(" We tie.");
+        }
+        else if(determineWinner(playerMove, cpuMove) == INVALID_INPUT_OUTCOME)
+        {
+                System.out.println("what");
+        }
+        numGames++;
         // Record the moves made
 
         // Add one to the appropriate statistics
